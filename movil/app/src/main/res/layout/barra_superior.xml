@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Barra superior de las pantallas secundarias: atrás · título · acción -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp">
+
+    <ImageView
+        android:id="@+id/btnAtras"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_gravity="start|center_vertical"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Atrás"
+        android:padding="10dp"
+        android:src="@drawable/ic_atras"
+        app:tint="@color/texto" />
+
+    <TextView
+        android:id="@+id/tituloBarra"
+        style="@style/Texto.Etiqueta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/accionBarra"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_gravity="end|center_vertical"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Acción"
+        android:padding="10dp"
+        app:tint="@color/texto"
+        android:visibility="gone" />
+</FrameLayout>

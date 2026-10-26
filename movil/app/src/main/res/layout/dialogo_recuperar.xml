@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="24dp">
+
+    <TextView
+        android:id="@+id/recMensaje"
+        style="@style/Texto.Secundario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Te enviaremos un código de 6 dígitos para restablecer tu contraseña." />
+
+    <EditText
+        android:id="@+id/recCorreo"
+        style="@style/Entrada"
+        android:layout_marginTop="14dp"
+        android:hint="Correo electrónico"
+        android:inputType="textEmailAddress" />
+
+    <LinearLayout
+        android:id="@+id/recPaso2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/recCodigo"
+            style="@style/Entrada"
+            android:layout_marginTop="12dp"
+            android:hint="Código de 6 dígitos"
+            android:inputType="number"
+            android:maxLength="6" />
+
+        <EditText
+            android:id="@+id/recNueva"
+            style="@style/Entrada"
+            android:layout_marginTop="12dp"
+            android:hint="Nueva contraseña (mín. 8)"
+            android:inputType="textPassword" />
+    </LinearLayout>
+</LinearLayout>

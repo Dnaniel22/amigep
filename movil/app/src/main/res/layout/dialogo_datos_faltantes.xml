@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- BPM Fig. 9: "Completa datos faltantes (nivel, peso, altura)" -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="24dp">
+
+    <TextView
+        style="@style/Texto.Secundario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="La IA necesita estos datos para personalizar tu rutina." />
+
+    <TextView
+        android:id="@+id/etiquetaNivel"
+        style="@style/EtiquetaCampo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nivel" />
+
+    <Spinner
+        android:id="@+id/faltaNivel"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@drawable/bg_entrada"
+        android:popupBackground="@color/tarjeta_2" />
+
+    <TextView
+        android:id="@+id/etiquetaPeso"
+        style="@style/EtiquetaCampo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Peso (kg)" />
+
+    <EditText
+        android:id="@+id/faltaPeso"
+        style="@style/Entrada"
+        android:hint="Ej. 72.5"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/etiquetaAltura"
+        style="@style/EtiquetaCampo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Altura (m)" />
+
+    <EditText
+        android:id="@+id/faltaAltura"
+        style="@style/Entrada"
+        android:hint="Ej. 1.72"
+        android:inputType="numberDecimal" />
+</LinearLayout>
