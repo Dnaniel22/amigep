@@ -1,0 +1,18 @@
+# PostgreSQL para desarrollo local: docker compose up -d
+# (alternativa a instalar PostgreSQL; el backend crea las tablas con Flyway al iniciar)
+services:
+  postgres:
+    image: postgres:16
+    container_name: amigep-postgres
+    environment:
+      POSTGRES_DB: amigep
+      POSTGRES_USER: amigep
+      POSTGRES_PASSWORD: amigep
+      TZ: America/Lima
+    ports:
+      - "5432:5432"
+    volumes:
+      - amigep-datos:/var/lib/postgresql/data
+
+volumes:
+  amigep-datos:
