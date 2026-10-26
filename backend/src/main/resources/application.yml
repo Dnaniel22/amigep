@@ -1,0 +1,58 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: amigep
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/amigep}
+    username: ${DB_USER:amigep}
+    password: ${DB_PASSWORD:amigep}
+  jpa:
+    open-in-view: false
+    hibernate:
+      # El esquema lo crea Flyway con el script del documento (db/migration)
+      ddl-auto: none
+      naming:
+        # Los nombres de tablas/columnas son los del documento (idCliente, fechaRegistro...);
+        # PostgreSQL los guarda en minúsculas porque el script no usa comillas.
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: America/Lima
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  jackson:
+    time-zone: America/Lima
+    default-property-inclusion: non_null
+
+amigep:
+  zona-horaria: America/Lima
+  jwt:
+    # Cambiar en producción: export JWT_SECRET="una-clave-larga-de-al-menos-32-caracteres"
+    secreto: ${JWT_SECRET:amigep-clave-de-desarrollo-cambiar-en-produccion-2026}
+    expiracion-horas: 12
+  admin-inicial:
+    email: ${ADMIN_EMAIL:admin@angelsgym.pe}
+    contrasena: ${ADMIN_PASSWORD:Admin123*}
+  # true = al iniciar con la BD vacía se cargan datos de prueba (Angels GYM piloto)
+  datos-demo: ${DATOS_DEMO:true}
+  ia:
+    # Archivo donde se guardan los coeficientes del modelo de abandono entrenado
+    modelo-abandono: ${MODELO_ABANDONO:./data/modelo-abandono.json}
+    # Ejecución periódica (RF-18): todos los días a las 6:00 a.m.
+    cron-predicciones: "0 0 6 * * *"
+    # Avisos de vencimiento (RF-19): todos los días a las 8:00 a.m.
+    cron-vencimientos: "0 0 8 * * *"
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+logging:
+  level:
+    pe.edu.utp.amigep: INFO
