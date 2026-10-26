@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Lineamientos de diseño AMIGEP (APF2, sección 12.1) -->
+<resources>
+    <color name="fondo">#0A0B0E</color>
+    <color name="tarjeta">#15171C</color>
+    <color name="tarjeta_2">#1C1F25</color>
+    <color name="borde">#262A31</color>
+    <color name="texto">#F2F3F5</color>
+    <color name="texto_2">#B9BDC6</color>
+    <color name="apagado">#7E838D</color>
+    <color name="dorado">#E3B34C</color>
+    <color name="dorado_oscuro">#C9962F</color>
+    <color name="turquesa">#2BD9A3</color>
+    <color name="turquesa_texto">#062A1F</color>
+    <color name="rojo">#E8687A</color>
+    <color name="crema">#F2EEE3</color>
+    <color name="negro_qr">#111111</color>
+    <color name="turquesa_fondo">#262BD9A3</color>
+    <color name="dorado_fondo">#2EE3B34C</color>
+    <color name="rojo_fondo">#2BE8687A</color>
+    <color name="gris_fondo">#26A0A6B2</color>
+    <color name="sugerencia">#1E5C49</color>
+    <color name="sugerencia_borde">#2E7D64</color>
+    <color name="pista_barra">#2A2D34</color>
+    <color name="transparente">#00000000</color>
+</resources>

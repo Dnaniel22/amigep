@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Desarrollo: el backend local corre en http (sin TLS), en el emulador (10.0.2.2) o en la PC de la red Wi-Fi.
+  En producción publique la API con HTTPS y cambie cleartextTrafficPermitted a false.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

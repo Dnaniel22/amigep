@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AMIGEP</string>
+    <string name="lema">Tu gimnasio, tu progreso,\ntu ritmo — en una sola app.</string>
+    <string name="aviso_nutricional">Recomendaciones orientativas; no reemplazan la evaluación de un profesional.</string>
+    <string name="aviso_admin">¿Eres administrador? Ingresa desde el panel web.</string>
+    <string name="error_conexion">No se pudo conectar con el servidor</string>
+</resources>

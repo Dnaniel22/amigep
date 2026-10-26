@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Textos -->
+    <style name="Texto">
+        <item name="android:textColor">@color/texto</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="Texto.Titulo">
+        <item name="android:textSize">19sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Texto.Negrita">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Texto.Secundario">
+        <item name="android:textColor">@color/apagado</item>
+        <item name="android:textSize">12.5sp</item>
+    </style>
+    <style name="Texto.Seccion">
+        <item name="android:textColor">@color/apagado</item>
+        <item name="android:textSize">11.5sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_marginTop">22dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+    <style name="Texto.Etiqueta">
+        <item name="android:textColor">@color/apagado</item>
+        <item name="android:textSize">10.5sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.06</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    <style name="Texto.Valor">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">4dp</item>
+    </style>
+
+    <!-- Contenedores -->
+    <style name="Tarjeta">
+        <item name="android:background">@drawable/bg_tarjeta</item>
+        <item name="android:padding">16dp</item>
+    </style>
+    <style name="Pantalla">
+        <item name="android:paddingStart">@dimen/margen</item>
+        <item name="android:paddingEnd">@dimen/margen</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">28dp</item>
+    </style>
+
+    <!-- Botones (fondos propios: se anula el tinte de MaterialButton) -->
+    <style name="Boton">
+        <item name="android:layout_height">52dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">8dp</item>
+        <item name="iconSize">20dp</item>
+    </style>
+    <style name="Boton.Turquesa">
+        <item name="android:background">@drawable/bg_boton_turquesa</item>
+        <item name="android:textColor">@color/turquesa_texto</item>
+        <item name="iconTint">@color/turquesa_texto</item>
+    </style>
+    <style name="Boton.Dorado">
+        <item name="android:background">@drawable/bg_boton_dorado</item>
+        <item name="android:textColor">#2A1E05</item>
+        <item name="iconTint">#2A1E05</item>
+    </style>
+    <style name="Boton.Borde">
+        <item name="android:background">@drawable/bg_boton_borde</item>
+        <item name="android:textColor">@color/texto</item>
+        <item name="iconTint">@color/texto</item>
+    </style>
+    <style name="Boton.Peligro">
+        <item name="android:background">@drawable/bg_boton_borde</item>
+        <item name="android:textColor">@color/rojo</item>
+        <item name="iconTint">@color/rojo</item>
+    </style>
+
+    <!-- Formularios -->
+    <style name="Entrada">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">52dp</item>
+        <item name="android:background">@drawable/bg_entrada</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:textColor">@color/texto</item>
+        <item name="android:textColorHint">@color/apagado</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:importantForAutofill">no</item>
+    </style>
+    <style name="EtiquetaCampo" parent="Texto.Etiqueta">
+        <item name="android:layout_marginTop">14dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <!-- Chips e insignias -->
+    <style name="Chip">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:background">@drawable/bg_chip</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:textColor">@color/texto_2</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+    <style name="Insignia">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Avatar circular con iniciales -->
+    <style name="Avatar">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">@drawable/bg_avatar</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/fondo</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- Caja de ícono redondeada (accesos rápidos, listas) -->
+    <style name="CajaIcono">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">@drawable/bg_caja_icono</item>
+        <item name="android:padding">9dp</item>
+        <item name="tint">@color/texto</item>
+    </style>
+
+    <!-- Barra de progreso -->
+    <style name="Barra">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">6dp</item>
+        <item name="android:max">100</item>
+        <item name="android:progressDrawable">@drawable/progreso_turquesa</item>
+    </style>
+
+    <!-- Barra de navegación inferior -->
+    <style name="NavItem">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+    <style name="NavIcono">
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_height">22dp</item>
+        <item name="tint">@color/apagado</item>
+    </style>
+    <style name="NavTexto">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/apagado</item>
+    </style>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margen">20dp</dimen>
+    <dimen name="radio">16dp</dimen>
+    <dimen name="espacio">12dp</dimen>
+</resources>
