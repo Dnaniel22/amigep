@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Asignación de rutina (RF-08, RF-09 · BPM Fig. 8): ejercicios, series y repeticiones por día -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/barra_superior" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            style="@style/Pantalla"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="0dp">
+
+            <TextView
+                android:id="@+id/erCliente"
+                style="@style/Texto.Secundario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView style="@style/EtiquetaCampo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nombre de la rutina" />
+            <EditText android:id="@+id/erNombre" style="@style/Entrada" android:hint="Ej. Hipertrofia" android:inputType="textCapSentences" android:maxLength="60" />
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                    <TextView style="@style/EtiquetaCampo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Objetivo" />
+                    <Spinner android:id="@+id/erObjetivo" android:layout_width="match_parent" android:layout_height="52dp" android:background="@drawable/bg_entrada" android:popupBackground="@color/tarjeta_2" />
+                </LinearLayout>
+                <Space android:layout_width="12dp" android:layout_height="1dp" />
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                    <TextView style="@style/EtiquetaCampo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nivel" />
+                    <Spinner android:id="@+id/erNivel" android:layout_width="match_parent" android:layout_height="52dp" android:background="@drawable/bg_entrada" android:popupBackground="@color/tarjeta_2" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                    <TextView style="@style/EtiquetaCampo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sesiones / semana" />
+                    <EditText android:id="@+id/erSesiones" style="@style/Entrada" android:inputType="number" android:maxLength="1" />
+                </LinearLayout>
+                <Space android:layout_width="12dp" android:layout_height="1dp" />
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                    <TextView style="@style/EtiquetaCampo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Duración (semanas)" />
+                    <EditText android:id="@+id/erSemanas" style="@style/Entrada" android:inputType="number" android:maxLength="2" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/erNueva"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:buttonTint="@color/turquesa"
+                android:text="Guardar como rutina nueva (la actual se finaliza)"
+                android:textColor="@color/texto_2"
+                android:visibility="gone" />
+
+            <TextView
+                style="@style/Texto.Seccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Días de entrenamiento" />
+
+            <LinearLayout
+                android:id="@+id/erDias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <Button
+                android:id="@+id/erAgregarDia"
+                style="@style/Boton.Borde"
+                android:layout_width="match_parent"
+                android:layout_marginTop="4dp"
+                android:text="Agregar día"
+                app:icon="@drawable/ic_mas" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/erGuardar"
+        style="@style/Boton.Turquesa"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/margen"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/margen"
+        android:layout_marginBottom="16dp"
+        android:text="Guardar y notificar al cliente"
+        app:icon="@drawable/ic_check" />
+</LinearLayout>

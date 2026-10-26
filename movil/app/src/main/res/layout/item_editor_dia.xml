@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Tarjeta"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/edDiaNumero"
+            style="@style/Texto.Etiqueta"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/edDiaEliminar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Eliminar día"
+            android:padding="8dp"
+            android:src="@drawable/ic_basura"
+            app:tint="@color/rojo" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edDiaNombre"
+        style="@style/Entrada"
+        android:layout_marginTop="6dp"
+        android:hint="Nombre del día (ej. Torso)"
+        android:inputType="textCapSentences" />
+
+    <EditText
+        android:id="@+id/edDiaEnfoque"
+        style="@style/Entrada"
+        android:layout_marginTop="8dp"
+        android:hint="Enfoque (ej. Pecho · Espalda)"
+        android:inputType="textCapSentences" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
+
+        <TextView style="@style/Texto.Etiqueta" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="2.4" android:text="Ejercicio" />
+        <TextView style="@style/Texto.Etiqueta" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.9" android:text="Series" />
+        <TextView style="@style/Texto.Etiqueta" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Reps" />
+        <Space android:layout_width="32dp" android:layout_height="1dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/edDiaEjercicios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    <TextView
+        android:id="@+id/edDiaAgregar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="4dp"
+        android:text="+ Agregar ejercicio"
+        android:textColor="@color/turquesa"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+</LinearLayout>

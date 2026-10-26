@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        style="@style/Pantalla"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/peAvatar"
+                style="@style/Avatar"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:textSize="17sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/peNombre"
+                    style="@style/Texto.Negrita"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/peEspecialidad"
+                    style="@style/Texto.Secundario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/peEmail"
+                    style="@style/Texto.Secundario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                style="@style/Tarjeta"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView style="@style/Texto.Etiqueta" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Clientes asignados" />
+                <TextView android:id="@+id/peClientes" style="@style/Texto.Valor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/dorado" android:textSize="24sp" />
+            </LinearLayout>
+
+            <Space android:layout_width="12dp" android:layout_height="1dp" />
+
+            <LinearLayout
+                style="@style/Tarjeta"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView style="@style/Texto.Etiqueta" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rutinas activas" />
+                <TextView android:id="@+id/peRutinas" style="@style/Texto.Valor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/turquesa" android:textSize="24sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            style="@style/Texto.Seccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reportes" />
+
+        <include android:id="@+id/peReporteAsistencia" layout="@layout/item_opcion" />
+        <include android:id="@+id/peReporteRutinas" layout="@layout/item_opcion" />
+
+        <TextView
+            style="@style/Texto.Seccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Configuración" />
+
+        <include android:id="@+id/peSeguridad" layout="@layout/item_opcion" />
+        <include android:id="@+id/peSalir" layout="@layout/item_opcion" />
+    </LinearLayout>
+</ScrollView>
