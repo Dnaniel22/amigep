@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Editar datos del cliente usados para personalizar (RF-03, RF-10) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/barra_superior" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            style="@style/Pantalla"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView style="@style/EtiquetaCampo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Teléfono" />
+            <EditText android:id="@+id/edTelefono" style="@style/Entrada" android:hint="9 dígitos" android:inputType="phone" android:maxLength="15" />
+
+            <TextView style="@style/EtiquetaCampo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Objetivo" />
+            <Spinner android:id="@+id/edObjetivo" android:layout_width="match_parent" android:layout_height="52dp" android:background="@drawable/bg_entrada" android:popupBackground="@color/tarjeta_2" />
+
+            <TextView style="@style/EtiquetaCampo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nivel" />
+            <Spinner android:id="@+id/edNivel" android:layout_width="match_parent" android:layout_height="52dp" android:background="@drawable/bg_entrada" android:popupBackground="@color/tarjeta_2" />
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                    <TextView style="@style/EtiquetaCampo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Peso (kg)" />
+                    <EditText android:id="@+id/edPeso" style="@style/Entrada" android:hint="Ej. 72.5" android:inputType="numberDecimal" />
+                </LinearLayout>
+                <Space android:layout_width="12dp" android:layout_height="1dp" />
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                    <TextView style="@style/EtiquetaCampo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Altura (m)" />
+                    <EditText android:id="@+id/edAltura" style="@style/Entrada" android:hint="Ej. 1.72" android:inputType="numberDecimal" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView style="@style/EtiquetaCampo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fecha de nacimiento" />
+            <TextView android:id="@+id/edNacimiento" style="@style/Entrada" android:gravity="center_vertical" android:hint="Seleccionar fecha" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnGuardar"
+        style="@style/Boton.Turquesa"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/margen"
+        android:layout_marginEnd="@dimen/margen"
+        android:layout_marginBottom="16dp"
+        android:text="Guardar cambios" />
+</LinearLayout>

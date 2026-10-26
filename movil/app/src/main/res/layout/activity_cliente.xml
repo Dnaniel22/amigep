@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Rol cliente: barra inferior con cinco pestañas visible en todas las pantallas principales (RC-04) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/contenido"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/barraNavegacion"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:background="@drawable/bg_barra_navegacion"
+        android:orientation="horizontal">
+        <LinearLayout android:id="@+id/navInicio" style="@style/NavItem">
+            <ImageView style="@style/NavIcono" android:src="@drawable/ic_inicio" android:contentDescription="Inicio" />
+            <TextView style="@style/NavTexto" android:text="Inicio" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/navEntreno" style="@style/NavItem">
+            <ImageView style="@style/NavIcono" android:src="@drawable/ic_entreno" android:contentDescription="Entreno" />
+            <TextView style="@style/NavTexto" android:text="Entreno" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/navPagos" style="@style/NavItem">
+            <ImageView style="@style/NavIcono" android:src="@drawable/ic_pagos" android:contentDescription="Pagos" />
+            <TextView style="@style/NavTexto" android:text="Pagos" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/navGuia" style="@style/NavItem">
+            <ImageView style="@style/NavIcono" android:src="@drawable/ic_guia" android:contentDescription="Guía" />
+            <TextView style="@style/NavTexto" android:text="Guía" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/navPerfil" style="@style/NavItem">
+            <ImageView style="@style/NavIcono" android:src="@drawable/ic_perfil" android:contentDescription="Perfil" />
+            <TextView style="@style/NavTexto" android:text="Perfil" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

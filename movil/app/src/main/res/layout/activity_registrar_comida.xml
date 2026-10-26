@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Registrar comida (RF-12, BPM Fig. 10): valida los campos antes de guardar (RNF-05) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/barra_superior" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            style="@style/Pantalla"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/EtiquetaCampo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Tipo de comida" />
+
+            <LinearLayout
+                android:id="@+id/tipos1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/tipos2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+            <TextView
+                style="@style/EtiquetaCampo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Qué comiste?" />
+
+            <EditText
+                android:id="@+id/descripcion"
+                style="@style/Entrada"
+                android:hint="Ej. Pollo a la plancha con arroz y ensalada"
+                android:inputType="textCapSentences"
+                android:maxLength="200" />
+
+            <TextView
+                style="@style/EtiquetaCampo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calorías (kcal)" />
+
+            <EditText
+                android:id="@+id/calorias"
+                style="@style/Entrada"
+                android:hint="Ej. 550"
+                android:inputType="number"
+                android:maxLength="4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/EtiquetaCampo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Proteínas (g)" />
+
+                    <EditText
+                        android:id="@+id/proteinas"
+                        style="@style/Entrada"
+                        android:hint="0"
+                        android:inputType="numberDecimal" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/EtiquetaCampo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Carbos (g)" />
+
+                    <EditText
+                        android:id="@+id/carbohidratos"
+                        style="@style/Entrada"
+                        android:hint="0"
+                        android:inputType="numberDecimal" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/EtiquetaCampo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Grasas (g)" />
+
+                    <EditText
+                        android:id="@+id/grasas"
+                        style="@style/Entrada"
+                        android:hint="0"
+                        android:inputType="numberDecimal" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                style="@style/Texto.Secundario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="La IA comparará tu consumo con la meta de tu plan y te dará una recomendación." />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnGuardar"
+        style="@style/Boton.Turquesa"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/margen"
+        android:layout_marginEnd="@dimen/margen"
+        android:layout_marginBottom="16dp"
+        android:text="Guardar comida" />
+</LinearLayout>
