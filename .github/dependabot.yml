@@ -1,0 +1,21 @@
+# Mantenimiento preventivo: Dependabot revisa cada semana las dependencias y abre pull requests
+# con las actualizaciones (la integración continua las prueba antes de fusionarlas).
+version: 2
+updates:
+  - package-ecosystem: maven
+    directory: /backend
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    target-branch: develop
+  - package-ecosystem: gradle
+    directory: /movil
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    target-branch: develop
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    target-branch: develop

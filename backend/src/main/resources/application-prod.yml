@@ -1,0 +1,27 @@
+# Perfil de producción (despliegue): java -jar amigep-backend-1.0.0.jar --spring.profiles.active=prod
+# Variables obligatorias: DB_URL, DB_USER, DB_PASSWORD, JWT_SECRET y ADMIN_PASSWORD
+# (ver despliegue/amigep.env.ejemplo). Si falta JWT_SECRET o ADMIN_PASSWORD, el backend no inicia.
+
+amigep:
+  jwt:
+    secreto: ${JWT_SECRET}
+  admin-inicial:
+    contrasena: ${ADMIN_PASSWORD}
+  # Sin datos de prueba, salvo que se indique DATOS_DEMO=true (por ejemplo, para la demostración)
+  datos-demo: ${DATOS_DEMO:false}
+  recuperacion:
+    # El código de recuperación no se devuelve en la respuesta
+    mostrar-codigo: false
+
+# Sin documentación pública de la API
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+logging:
+  level:
+    root: WARN
+    pe.edu.utp.amigep: INFO
+    amigep.solicitudes: INFO

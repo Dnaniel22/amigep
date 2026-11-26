@@ -71,7 +71,7 @@ Variables de entorno opcionales: `DB_URL`, `DB_USER`, `DB_PASSWORD`, `JWT_SECRET
 `DATOS_DEMO` (`true` por defecto). Con la base vacía y `DATOS_DEMO=true` se cargan datos de prueba con ~6 meses de historial
 (asistencias, pagos, rutinas, comidas y progreso), se **entrena el modelo de abandono** y se calculan las predicciones.
 
-Pruebas unitarias del módulo inteligente: `./mvnw test`.
+Pruebas unitarias del módulo inteligente: `./mvnw test` (reportes en `backend/target/surefire-reports/`).
 
 ## 3. App móvil (Android)
 
@@ -91,6 +91,43 @@ Pruebas unitarias del módulo inteligente: `./mvnw test`.
 
 Recuperar contraseña: sin servidor de correo, el código de 6 dígitos se muestra en la respuesta y en el log del backend
 (`amigep.recuperacion.mostrar-codigo=true`, desactivar en producción).
+
+## 4. Pruebas funcionales y de seguridad
+
+Con el backend en ejecución (perfil por defecto, con datos de prueba), desde la carpeta raíz del repositorio:
+
+```bash
+java pruebas/PruebasAmigep.java                          # http://localhost:8080
+java pruebas/PruebasAmigep.java http://IP:8080 --produccion   # además exige la configuración de producción
+```
+
+Solo necesita el JDK 17 o superior. Ejecuta 41 pruebas funcionales (RF-01 a RF-20) y 28 de seguridad (OWASP Top 10),
+mide el tiempo de cada solicitud (RNF-06) y genera `pruebas/reportes/reporte-pruebas-AAAAMMDD-HHMMSS.html`.
+Crea un cliente «Prueba QA» que queda desactivado al final. Estados: PASA, FALLA, ADVERTENCIA (riesgo conocido o
+configuración de desarrollo) y OMITIDA (falta un dato previo).
+
+## 5. Despliegue (perfil de producción)
+
+```bash
+cd backend
+./mvnw clean package                 # Windows: mvnw.cmd clean package  -> target/amigep-backend-1.0.0.jar
+cd ..
+cp despliegue/amigep.env.ejemplo despliegue/amigep.env   # y cambiar las claves
+sh despliegue/iniciar-produccion.sh  # Windows: despliegue\iniciar-produccion.bat
+```
+
+El perfil `prod` (`application-prod.yml`) exige `JWT_SECRET` y `ADMIN_PASSWORD`, no carga datos de prueba
+(salvo `DATOS_DEMO=true`), no devuelve el código de recuperación y desactiva Swagger. En un servidor Linux se puede
+instalar como servicio con `despliegue/amigep.service`. La app móvil se conecta escribiendo `http://IP-DEL-SERVIDOR:8080/`
+en la configuración del servidor del login.
+
+## 6. Monitoreo
+
+* **Logs**: consola y `logs/amigep.log` (rotación diaria o a los 10 MB, 30 días). El logger `amigep.solicitudes`
+  registra cada solicitud a la API: método, ruta, estado HTTP, duración e IP (WARN para 401/403 y solicitudes de 2 s o más,
+  ERROR para 5xx).
+* **Métricas** (Spring Boot Actuator): `GET /actuator/health` (público) y, con token de administrador,
+  `GET /actuator/metrics/http.server.requests`, `jvm.memory.used`, `process.cpu.usage`, `hikaricp.connections.active`, etc.
 
 ## Pantallas implementadas
 

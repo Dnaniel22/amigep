@@ -1,0 +1,158 @@
+# Integración continua de AMIGEP (Proyecto Final)
+# - Backend: compila con Maven, ejecuta las pruebas unitarias, despliega el .jar con el perfil prod sobre
+#   PostgreSQL 16, ejecuta las pruebas funcionales y de seguridad, toma capturas del panel y reúne logs y
+#   métricas. Todo queda en el artefacto "evidencias-proyecto-final" de cada ejecución (pestaña Actions).
+# - App móvil: compila la APK de depuración (artefacto "amigep-app-debug-apk").
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    name: Backend · build, pruebas y despliegue
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: amigep
+          POSTGRES_PASSWORD: amigep
+          POSTGRES_DB: amigep
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U amigep"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      TZ: America/Lima
+      BASE: http://localhost:8080
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Compilar con Maven y ejecutar las pruebas unitarias
+        working-directory: backend
+        run: |
+          mkdir -p ../evidencias
+          chmod +x mvnw
+          ./mvnw -B -ntp clean package 2>&1 | tee ../evidencias/01-build-maven.txt
+
+      - name: Desplegar el backend (perfil prod, con datos de demostración)
+        working-directory: backend
+        env:
+          DB_URL: jdbc:postgresql://localhost:5432/amigep
+          DB_USER: amigep
+          DB_PASSWORD: amigep
+          JWT_SECRET: ci-${{ github.run_id }}-${{ github.run_attempt }}-clave-temporal-de-esta-ejecucion
+          ADMIN_PASSWORD: Admin123*
+          DATOS_DEMO: 'true'
+        run: |
+          ls -l target/*.jar | tee ../evidencias/02-artefacto-maven.txt
+          nohup java -jar target/amigep-backend-1.0.0.jar --spring.profiles.active=prod > ../evidencias/03-despliegue-consola.txt 2>&1 &
+          # readiness = UP cuando terminó la carga inicial (datos de demostración y modelo de abandono)
+          for i in $(seq 1 120); do
+            if curl -sf "$BASE/actuator/health/readiness" > /dev/null; then echo "Backend listo tras $((i * 2)) s"; break; fi
+            sleep 2
+          done
+          curl -sf "$BASE/actuator/health/readiness"; echo
+          curl -sf "$BASE/actuator/health" | tee ../evidencias/04-actuator-health.json
+
+      - name: Pruebas funcionales y de seguridad (modo producción)
+        run: java pruebas/PruebasAmigep.java "$BASE" --produccion 2>&1 | tee evidencias/05-pruebas-consola.txt
+
+      - name: Métricas de Actuator
+        if: always()
+        run: |
+          TOKEN=$(curl -s -X POST "$BASE/api/auth/login" -H 'Content-Type: application/json' \
+            -d '{"correo":"admin@angelsgym.pe","contrasena":"Admin123*","rol":"ADMINISTRADOR"}' \
+            | python3 -c 'import sys, json; print(json.load(sys.stdin).get("token", ""))')
+          {
+            for m in "http.server.requests" "http.server.requests?tag=status:401" "http.server.requests?tag=status:403" \
+                     "jvm.memory.used" "process.cpu.usage" "process.uptime" "hikaricp.connections.active" "jvm.threads.live"; do
+              echo "### GET /actuator/metrics/$m"
+              curl -s -H "Authorization: Bearer $TOKEN" "$BASE/actuator/metrics/$m"
+              echo; echo
+            done
+            echo "### GET /actuator/info"
+            curl -s "$BASE/actuator/info"; echo
+          } > evidencias/06-metricas-actuator.txt
+          cat evidencias/06-metricas-actuator.txt
+
+      - name: Capturas del panel web desplegado
+        if: always()
+        run: |
+          mkdir -p /tmp/capturas && cd /tmp/capturas
+          npm init -y > /dev/null
+          npm install --no-audit --no-fund playwright@1.49.1 > /dev/null
+          npx playwright install --with-deps chromium > /dev/null
+          cp "$GITHUB_WORKSPACE/.github/scripts/capturas-panel.cjs" .
+          node capturas-panel.cjs "$BASE" "$GITHUB_WORKSPACE/evidencias/capturas"
+
+      - name: Detener el backend y reunir logs y reportes
+        if: always()
+        run: |
+          pkill -f amigep-backend || true
+          sleep 3
+          cp backend/logs/amigep.log evidencias/07-amigep.log || true
+          grep "amigep.solicitudes" backend/logs/amigep.log | tail -n 80 > evidencias/08-log-solicitudes.txt || true
+          grep -E " (WARN|ERROR) " backend/logs/amigep.log | tail -n 80 > evidencias/09-log-advertencias-errores.txt || true
+          cp -r backend/target/surefire-reports evidencias/10-surefire-reports || true
+          cp pruebas/reportes/*.html evidencias/ || true
+          ls -R evidencias
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidencias-proyecto-final
+          path: evidencias
+          retention-days: 90
+
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: amigep-backend-jar
+          path: backend/target/amigep-backend-1.0.0.jar
+          retention-days: 90
+
+  movil:
+    name: App móvil · APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: Compilar la APK de depuración
+        working-directory: movil
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon assembleDebug
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: amigep-app-debug-apk
+          path: movil/app/build/outputs/apk/debug/*.apk
+          retention-days: 90
