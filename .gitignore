@@ -2,6 +2,11 @@
 backend/target/
 backend/data/
 *.log
+logs/
+backend/logs/
+# Despliegue (claves reales) y reportes de pruebas
+despliegue/amigep.env
+pruebas/reportes/
 # IDE
 .idea/
 *.iml

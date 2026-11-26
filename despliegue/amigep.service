@@ -1,0 +1,19 @@
+# Servicio systemd para un servidor Linux (opcional).
+# Copiar el .jar y amigep.env a /opt/amigep, luego:
+#   sudo cp amigep.service /etc/systemd/system/ && sudo systemctl enable --now amigep
+#   journalctl -u amigep -f      (logs del servicio)
+[Unit]
+Description=AMIGEP - API REST y panel web
+After=network.target postgresql.service
+
+[Service]
+User=amigep
+WorkingDirectory=/opt/amigep
+EnvironmentFile=/opt/amigep/amigep.env
+ExecStart=/usr/bin/java -Xms256m -Xmx512m -jar /opt/amigep/amigep-backend-1.0.0.jar --spring.profiles.active=prod
+SuccessExitStatus=143
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
