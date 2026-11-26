@@ -97,6 +97,17 @@ public class PruebasAmigep {
         resultados.add(r);
         System.out.printf("[%-11s] %-6s %-14s %s%n", o.estado(), id, referencia, descripcion);
         if (o.estado() != Estado.PASA) System.out.println("              -> " + o.detalle());
+        if (EN_GITHUB && (o.estado() == Estado.FALLA || o.estado() == Estado.ADVERTENCIA)) {
+            System.out.println("::" + (o.estado() == Estado.FALLA ? "error" : "warning") + " title=" + anotacion(id + " " + descripcion)
+                    + "::" + anotacion(o.detalle()));
+        }
+    }
+
+    /** En GitHub Actions las fallas y advertencias se muestran como anotaciones del pull request. */
+    static final boolean EN_GITHUB = "true".equals(System.getenv("GITHUB_ACTIONS"));
+
+    static String anotacion(String t) {
+        return t == null ? "" : t.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A").replace(":", "%3A").replace(",", "%2C");
     }
 
     // ------------------------------------------------------------------ HTTP
@@ -1037,6 +1048,20 @@ public class PruebasAmigep {
         }
         Path reporte = escribirReporte(inicio, fin);
         System.out.println("Reporte: " + reporte.toAbsolutePath());
+        if (EN_GITHUB) {
+            System.out.println("::notice title=Pruebas funcionales y de seguridad::" + anotacion(resultados.size() + " pruebas \u00b7 " + conteo));
+            String resumen = System.getenv("GITHUB_STEP_SUMMARY");
+            if (resumen != null) {
+                StringBuilder md = new StringBuilder("## Pruebas funcionales y de seguridad\n\n")
+                        .append(resultados.size()).append(" pruebas \u00b7 ").append(conteo).append("\n\n| ID | Referencia | Caso | Estado | Obtenido |\n|---|---|---|---|---|\n");
+                for (Resultado r : resultados) {
+                    md.append("| ").append(r.id()).append(" | ").append(r.referencia()).append(" | ").append(r.descripcion()).append(" | ")
+                            .append(r.estado()).append(" | ").append(r.obtenido().replace("|", "/")).append(" |\n");
+                }
+                Files.writeString(Path.of(resumen), md.toString(), StandardCharsets.UTF_8,
+                        java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.APPEND);
+            }
+        }
         System.exit(conteo.get(Estado.FALLA) > 0 ? 1 : 0);
     }
 }
