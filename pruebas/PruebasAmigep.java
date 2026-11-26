@@ -526,8 +526,9 @@ public class PruebasAmigep {
 
         prueba("PF-14", F, "RF-05", "Consultar pagos del cliente", "200 con los 2 pagos registrados", () -> {
             if (tokenAdmin == null || idClienteQa == null) return omitida("Requiere PF-08");
-            Resp r = llamar("GET", "/api/admin/pagos?q=" + DNI_QA, tokenAdmin, null, "GET /api/admin/pagos");
-            int n = lista(r.json(), "").size();
+            Resp r = llamar("GET", "/api/admin/pagos?q=" + q("Prueba QA"), tokenAdmin, null, "GET /api/admin/pagos");
+            int n = 0;
+            for (Object p : lista(r.json(), "")) if (idClienteQa.equals(entero(p, "idCliente"))) n++;
             return r.status() == 200 && n >= 2 ? pasa("HTTP 200, " + n + " pagos") : falla("HTTP " + r.status() + ", " + n + " pagos");
         });
 
@@ -1025,6 +1026,19 @@ public class PruebasAmigep {
         String inicio = LocalDateTime.now().withNano(0).toString().replace('T', ' ');
         System.out.println("AMIGEP \u00b7 Pruebas funcionales y de seguridad");
         System.out.println("Servidor: " + base + (produccion ? " (modo producci\u00f3n)" : " (entorno de pruebas)"));
+        // Espera a que el backend termine la carga inicial (readiness de Actuator), hasta 3 minutos
+        for (int intento = 0; intento < 90; intento++) {
+            Resp listo = llamar("GET", "/actuator/health/readiness", null, null, "GET /actuator/health/readiness");
+            if (listo.status() != 0 && listo.status() != 503) break;
+            if (intento == 0) System.out.println("Esperando a que el backend termine de iniciar...");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
+        mediciones.clear();
         Resp ping = llamar("GET", "/api/planes", null, null, "GET /api/planes");
         if (ping.status() == 0) {
             System.out.println("No se pudo conectar con " + base + ". Inicie el backend (./mvnw spring-boot:run) e intente de nuevo.");

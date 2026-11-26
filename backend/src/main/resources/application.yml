@@ -67,6 +67,9 @@ management:
   endpoint:
     health:
       show-details: never
+      # /actuator/health/readiness responde UP cuando terminó la carga inicial (datos y modelo de IA)
+      probes:
+        enabled: true
   info:
     env:
       enabled: true
