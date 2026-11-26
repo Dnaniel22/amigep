@@ -39,6 +39,10 @@ amigep:
     contrasena: ${ADMIN_PASSWORD:Admin123*}
   # true = al iniciar con la BD vacía se cargan datos de prueba (Angels GYM piloto)
   datos-demo: ${DATOS_DEMO:true}
+  recuperacion:
+    # true = el código de recuperación se devuelve en la respuesta (solo pruebas, sin servidor de correo).
+    # En producción (perfil prod) es false.
+    mostrar-codigo: ${MOSTRAR_CODIGO_RECUPERACION:true}
   ia:
     # Archivo donde se guardan los coeficientes del modelo de abandono entrenado
     modelo-abandono: ${MODELO_ABANDONO:./data/modelo-abandono.json}
@@ -53,6 +57,35 @@ springdoc:
   api-docs:
     path: /v3/api-docs
 
+# Monitoreo (plan de monitoreo): /actuator/health e /actuator/info son públicos;
+# /actuator/metrics solo para el administrador (ver ConfiguracionSeguridad).
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: never
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    nombre: AMIGEP
+    version: '@project.version@'
+
+# Logs: consola y archivo con rotación diaria o al llegar a 10 MB; se conservan 30 días.
+# El logger amigep.solicitudes registra cada solicitud a la API (método, ruta, estado y duración).
 logging:
+  file:
+    name: ${LOG_FILE:logs/amigep.log}
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 30
+      total-size-cap: 500MB
   level:
     pe.edu.utp.amigep: INFO
+    amigep.solicitudes: INFO

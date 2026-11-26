@@ -46,6 +46,9 @@ public class ConfiguracionSeguridad {
                         .requestMatchers("/api/auth/login", "/api/auth/recuperar", "/api/auth/restablecer").permitAll()
                         .requestMatchers("/api/planes").permitAll()
                         .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        // Monitoreo: el estado del servicio es público; las métricas, solo para el administrador
+                        .requestMatchers("/actuator/health", "/actuator/health/**", "/actuator/info").permitAll()
+                        .requestMatchers("/actuator/**").hasRole("ADMINISTRADOR")
                         .requestMatchers("/api/admin/**").hasRole("ADMINISTRADOR")
                         .requestMatchers("/api/entrenador/**").hasRole("ENTRENADOR")
                         .requestMatchers("/api/cliente/**").hasRole("CLIENTE")
